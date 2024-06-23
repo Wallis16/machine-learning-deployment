@@ -7,3 +7,8 @@ services:
       - "5000:5000"
     volumes:
       - "./data:/mlflow"
+    networks:
+      - machine-learning-deployment_ml-net
+networks:
+  machine-learning-deployment_ml-net:
+    external: true

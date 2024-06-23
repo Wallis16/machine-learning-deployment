@@ -5,14 +5,15 @@ from sklearn.model_selection import cross_val_score
 from sklearn.ensemble import RandomForestRegressor
 from pandas import DataFrame
 from optuna import Trial
-from dotenv import load_dotenv, find_dotenv
+# from dotenv import load_dotenv, find_dotenv
 
 import numpy as np
 import mlflow
 
-load_dotenv(find_dotenv())
+# load_dotenv(find_dotenv())
+mlflow_uri = os.getenv('mlflow_uri')
 
-mlflow.set_tracking_uri(os.getenv('MLFLOW_URI'))
+mlflow.set_tracking_uri(mlflow_uri)
 
 def objective(trial : Trial, x : DataFrame, y : np.ndarray, collection_name: str) -> float:
     """<>"""

@@ -1,0 +1,12 @@
+version: '2.14.0'
+services:
+  web:
+    image: backend-integrated-with-mlflow:0.0.1
+    restart: always
+    ports:
+      - "8000:8000"
+    networks:
+      - ml-net
+networks:
+  ml-net:
+    driver: bridge

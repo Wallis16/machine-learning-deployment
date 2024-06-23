@@ -1,15 +1,15 @@
-from dotenv import load_dotenv, find_dotenv
+# from dotenv import load_dotenv, find_dotenv
 from fastapi import Depends, HTTPException
 from pymongo.errors import ServerSelectionTimeoutError
 from pymongo import MongoClient
 
 import os
 
-load_dotenv(find_dotenv())
+# load_dotenv(find_dotenv())
 
-user = os.getenv("MONGODB_USER")
-password = os.getenv("MONGODB_PASSWORD")
-database = os.getenv("MONGODB_DATABASE")
+user = os.getenv("user")
+password = os.getenv("password")
+database = os.getenv("database")
 #collection_name = os.getenv("MONGODB_COLLECTION")
 
 #mongo_uri = f'mongodb+srv://{user}:{password}@{database}.hi7evkw.mongodb.net/'

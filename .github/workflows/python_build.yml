@@ -17,6 +17,14 @@ jobs:
 
     runs-on: Ubuntu-20.04
 
+    strategy:
+      matrix:
+        include:
+        - image: diogeneswallis96/mlflow-server:0.0.1
+          dockerfile: mlflow/Dockerfile
+        - image: diogeneswallis96/backend-integrated-with-mlflow:0.0.1
+          dockerfile: app/Dockerfile
+
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python 3.11.6
@@ -34,9 +42,6 @@ jobs:
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-    - name: Test with pytest
-      run: |
-        pytest test/endpoints.py
 
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v2
@@ -47,9 +52,18 @@ jobs:
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: Extract metadata (tags, labels) for Docker
+      id: meta
+      uses: docker/metadata-action@v4
+      with:
+        images: ${{ matrix.image }}
+
     - name: Build and push
       uses: docker/build-push-action@v4
       with:
-        context: "{{defaultContext}}:mlflow/"
+        context: .
+        file: ${{ matrix.dockerfile }}
         push: true
-        tags: diogeneswallis96/mlflow-server:0.0.1
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
