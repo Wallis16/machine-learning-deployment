@@ -59,12 +59,19 @@ jobs:
       with:
         images: ${{ matrix.image }}
 
+
+    - name: Remove :master from tags
+      id: remove-master
+      run: |
+        tags_with_master="${{ steps.meta.outputs.tags }}"
+        tags_without_master="${tags_with_master/:master/}"
+        echo "::set-output name=tags::${tags_without_master}"
+
     - name: Build and push
       uses: docker/build-push-action@v4
-
       with:
         context: .
         file: ${{ matrix.dockerfile }}
         push: true
-        tags: ${{ steps.meta.outputs.tags}} - ${{':master'}}
+        tags: ${{ steps.remove-master.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
