@@ -23,7 +23,7 @@ jobs:
         - image: diogeneswallis96/mlflow-server:0.0.1
           dockerfile: mlflow/Dockerfile
         - image: diogeneswallis96/backend-integrated-with-mlflow:0.0.1
-          dockerfile: app/Dockerfile
+          dockerfile: Dockerfile
 
     steps:
     - uses: actions/checkout@v3
