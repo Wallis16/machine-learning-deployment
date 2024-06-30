@@ -21,7 +21,7 @@ def skelarn_model(data_for_training, collection_name):
     x_train, _, y_train, _ = train_test_split(x, y.values.ravel(),
                                     test_size=0.33, random_state=42)
     study = optuna.create_study(study_name='optimization', direction='maximize')
-    study.optimize(lambda trial: objective(trial, x_train, y_train, collection_name), n_trials=10)
+    study.optimize(lambda trial: objective(trial, x_train, y_train, collection_name), n_trials=2)
 
     best_trial = study.best_trial
 
