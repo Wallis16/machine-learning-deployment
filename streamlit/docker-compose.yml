@@ -1,0 +1,12 @@
+version: '2.14.0'
+services:
+  web:
+    image: web-streamlit:0.0.1
+    restart: always
+    ports:
+      - "8501:8501"
+    networks:
+      - machine-learning-deployment_ml-net
+networks:
+  machine-learning-deployment_ml-net:
+    external: true
