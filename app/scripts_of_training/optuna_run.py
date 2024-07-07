@@ -8,7 +8,7 @@ import optuna
 numerical_features = ['passenger_count', 'trip_distance',
                            'payment_type', 'fare_amount']
 
-def skelarn_model(data_for_training, collection_name):
+def skelarn_model(data_for_training, collection_name, mlflow_uri):
     """<>"""
 
     data_for_training = data_for_training[numerical_features]
@@ -21,7 +21,7 @@ def skelarn_model(data_for_training, collection_name):
     x_train, _, y_train, _ = train_test_split(x, y.values.ravel(),
                                     test_size=0.33, random_state=42)
     study = optuna.create_study(study_name='optimization', direction='maximize')
-    study.optimize(lambda trial: objective(trial, x_train, y_train, collection_name), n_trials=2)
+    study.optimize(lambda trial: objective(trial, x_train, y_train, collection_name, mlflow_uri), n_trials=2)
 
     best_trial = study.best_trial
 

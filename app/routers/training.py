@@ -7,14 +7,14 @@ import pandas as pd
 router = APIRouter()
 
 @router.get("/run_training/", tags=['ML training'])
-async def run_training(collection_name: str, collection_ = Depends(get_database)):
+async def run_training(collection_name: str, mlflow_uri: str, collection_ = Depends(get_database)):
 
     try:
 
         collection = collection_[collection_name]
         documents = collection.find()
         data_for_training = pd.DataFrame(documents)
-        return optuna_run.skelarn_model(data_for_training, collection_name)
+        return optuna_run.skelarn_model(data_for_training, collection_name, mlflow_uri)
 
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))

@@ -11,13 +11,11 @@ import numpy as np
 import mlflow
 
 # load_dotenv(find_dotenv())
-mlflow_uri = os.getenv('mlflow_uri')
 
-mlflow.set_tracking_uri(mlflow_uri)
-
-def objective(trial : Trial, x : DataFrame, y : np.ndarray, collection_name: str) -> float:
+def objective(trial : Trial, x : DataFrame, y : np.ndarray, collection_name: str, mlflow_uri: str) -> float:
     """<>"""
 
+    mlflow.set_tracking_uri(mlflow_uri)
     mlflow.set_experiment(collection_name)
     
     with mlflow.start_run():

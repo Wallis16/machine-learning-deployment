@@ -4,24 +4,12 @@ from pymongo.errors import ServerSelectionTimeoutError
 from pymongo import MongoClient
 
 import os
-
-# load_dotenv(find_dotenv())
+#from dotenv import load_dotenv, find_dotenv
+#load_dotenv(find_dotenv())
 
 user = os.getenv("user")
 password = os.getenv("password")
 database = os.getenv("database")
-#collection_name = os.getenv("MONGODB_COLLECTION")
-
-#mongo_uri = f'mongodb+srv://{user}:{password}@{database}.hi7evkw.mongodb.net/'
-#client = MongoClient(mongo_uri)
-#db = client[database]
-#collection = db[collection_name]
-
-#documents = collection.find()
-#import pandas as pd
-
-#data_for_training = pd.DataFrame(documents)
-#print(data_for_training)
 
 # Dependency to get the MongoDB client
 async def get_mongo_client():
