@@ -17,8 +17,36 @@ spec:
       containers:
       - name: backend-container
         image: diogeneswallis96/backend-integrated-with-mlflow:0.0.1
+        imagePullPolicy: "Always"
         ports:
         - containerPort: 8000
+        env:
+        - name: user
+          valueFrom:
+            secretKeyRef:
+              name: backend-secret
+              key: mongo-root-username
+        - name: password
+          valueFrom: 
+            secretKeyRef:
+              name: backend-secret
+              key: mongo-root-password
+        - name: database
+          valueFrom: 
+            secretKeyRef:
+              name: backend-secret
+              key: mongo-root-database
+        - name: mlflow_experiment
+          valueFrom: 
+            secretKeyRef:
+              name: backend-secret
+              key: mlflow-experiment
+        - name: URL_MLFLOW_SERVER
+          valueFrom: 
+            configMapKeyRef:
+              name: mlflow-configmap
+              key: artifacts_url
+
 ---
 apiVersion: v1
 kind: Service
@@ -30,6 +58,6 @@ spec:
   type: LoadBalancer
   ports:
     - protocol: TCP
-      port: 8000
+      port: 80
       targetPort: 8000
       nodePort: 30022
