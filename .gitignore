@@ -177,3 +177,4 @@ pyrightconfig.json
 
 mlflow/data/*
 .k8s/backend-secrets.yml
+inference_models/*

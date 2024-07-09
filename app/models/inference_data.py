@@ -6,5 +6,6 @@ class Parameters(BaseModel):
     payment_type: list
 
 class InferenceData(BaseModel):
-    logged_model: str
+    run_id: str
+    mlflow_uri: str
     inference_data: Parameters
