@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: streamlit-configmap
 data:
-  artifacts_url: http://localhost:8000
+  artifacts_url: http://localhost:2323
