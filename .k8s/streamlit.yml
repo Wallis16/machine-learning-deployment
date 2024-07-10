@@ -30,6 +30,6 @@ spec:
   type: LoadBalancer
   ports:
     - protocol: TCP
-      port: 80
+      port: 8501
       targetPort: 8501
-      nodePort: 30023
+      nodePort: 30024

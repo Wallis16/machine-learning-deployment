@@ -41,6 +41,11 @@ spec:
             secretKeyRef:
               name: backend-secret
               key: mlflow-experiment
+        - name: URL_STREAMLIT
+          valueFrom: 
+            configMapKeyRef:
+              name: streamlit-configmap
+              key: artifacts_url
 
 ---
 apiVersion: v1
@@ -53,6 +58,6 @@ spec:
   type: LoadBalancer
   ports:
     - protocol: TCP
-      port: 80
+      port: 8000
       targetPort: 8000
       nodePort: 30022
