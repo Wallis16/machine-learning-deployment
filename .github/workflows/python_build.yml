@@ -24,6 +24,8 @@ jobs:
           dockerfile: mlflow/Dockerfile
         - image: diogeneswallis96/backend-integrated-with-mlflow:0.0.1
           dockerfile: Dockerfile
+        - image: diogeneswallis96/streamlit-ml:0.0.1
+          dockerfile: streamlit/Dockerfile
 
     steps:
     - uses: actions/checkout@v3
