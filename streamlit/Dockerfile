@@ -13,4 +13,4 @@ RUN pip install streamlit==1.31.1
 EXPOSE 8501
 
 # Run MLflow server when the container launches
-CMD ["streamlit", "run", "web.py"]
+CMD ["streamlit", "run", "streamlit/web.py"]
