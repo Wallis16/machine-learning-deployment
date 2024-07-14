@@ -12,5 +12,8 @@ RUN pip install streamlit==1.31.1
 # Expose the MLflow UI port
 EXPOSE 8501
 
-# Run MLflow server when the container launches
-CMD ["streamlit", "run", "streamlit/web.py"]
+RUN python setup.py sdist bdist_wheel
+
+RUN pip install dist/mycommand-1.0.5-py3-none-any.whl
+
+CMD ["mycommand"]
