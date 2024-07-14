@@ -22,10 +22,13 @@ jobs:
         include:
         - image: diogeneswallis96/mlflow-server:0.0.1
           dockerfile: mlflow/Dockerfile
+          context: ./mlflow
         - image: diogeneswallis96/backend-integrated-with-mlflow:0.0.1
           dockerfile: Dockerfile
+          context: ./
         - image: diogeneswallis96/streamlit-ml:1.0.0
           dockerfile: streamlit/Dockerfile
+          context: ./streamlit
 
     steps:
     - uses: actions/checkout@v4
@@ -72,7 +75,7 @@ jobs:
     - name: Build and push
       uses: docker/build-push-action@v4
       with:
-        context: .
+        context: ${{ matrix.context }}
         file: ${{ matrix.dockerfile }}
         push: true
         tags: ${{ steps.remove-master.outputs.tags }}
