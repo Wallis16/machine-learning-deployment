@@ -69,13 +69,11 @@ jobs:
         tags_without_master="${tags_with_master/:master/}"
         echo "::set-output name=tags::${tags_without_master}"
 
-    - name: Check streamlit directory contents
-      run: ls -l streamlit
-
     - name: Build and push
       uses: docker/build-push-action@v4
       with:
         context: .
+        run: ls
         file: ${{ matrix.dockerfile }}
         push: true
         tags: ${{ steps.remove-master.outputs.tags }}
