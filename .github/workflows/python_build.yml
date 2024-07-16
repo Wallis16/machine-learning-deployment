@@ -64,7 +64,6 @@ jobs:
       with:
         images: ${{ matrix.image }}
 
-
     - name: Remove :master from tags
       id: remove-master
       run: |
