@@ -19,6 +19,12 @@ spec:
         image: diogeneswallis96/streamlit-ml:0.0.1
         ports:
         - containerPort: 8501
+        env:
+        - name: URL_STREAMLIT
+          valueFrom: 
+            configMapKeyRef:
+              name: backend-configmap
+              key: artifacts_url
 ---
 apiVersion: v1
 kind: Service

@@ -41,11 +41,6 @@ spec:
             secretKeyRef:
               name: backend-secret
               key: mlflow-experiment
-        - name: URL_STREAMLIT
-          valueFrom: 
-            configMapKeyRef:
-              name: streamlit-configmap
-              key: artifacts_url
 
 ---
 apiVersion: v1
