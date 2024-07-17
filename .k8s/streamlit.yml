@@ -20,7 +20,7 @@ spec:
         ports:
         - containerPort: 8501
         env:
-        - name: URL_STREAMLIT
+        - name: URL_BACKEND
           valueFrom: 
             configMapKeyRef:
               name: backend-configmap

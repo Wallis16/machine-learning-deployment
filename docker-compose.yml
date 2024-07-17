@@ -1,7 +1,7 @@
 version: '2.14.0'
 services:
   web:
-    image: backend-integrated-with-mlflow:0.0.1
+    image: backend-integrated-with-mlflow:0.0.2
     restart: always
     ports:
       - "8000:8000"
