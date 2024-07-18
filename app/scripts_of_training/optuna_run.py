@@ -25,7 +25,7 @@ def skelarn_model(data_for_training, collection_name, mlflow_uri):
 
     best_trial = study.best_trial
 
-    return ({"accuracy": best_trial.value,
-     "trial": best_trial.number,
-    "n_estimators": best_trial.params["n_estimators"],
-    "max_depth": best_trial.params["max_depth"]})
+    return ({'accuracy': best_trial.value,
+     'trial': best_trial.number,
+    'n_estimators': best_trial.params['n_estimators'],
+    'max_depth': best_trial.params['max_depth']})

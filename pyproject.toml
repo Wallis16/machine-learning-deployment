@@ -16,6 +16,7 @@ mlflow = "^2.14.3"
 bson = "^0.5.10"
 pymongo = "^4.8.0"
 streamlit = "^1.36.0"
+pre-commit = "^3.7.1"
 
 
 [build-system]

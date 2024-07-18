@@ -6,7 +6,7 @@ import pandas as pd
 
 router = APIRouter()
 
-@router.get("/run_training/", tags=['ML training'])
+@router.get('/run_training/', tags=['ML training'])
 async def run_training(collection_name: str, mlflow_uri: str, collection_ = Depends(get_database)):
 
     try:

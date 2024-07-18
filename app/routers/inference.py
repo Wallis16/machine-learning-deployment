@@ -3,7 +3,7 @@ from scripts_of_inference.sklearn_inference import inference
 from models.inference_data import InferenceData
 router = APIRouter()
 
-@router.post("/inference/", tags=['ML inference'])
+@router.post('/inference/', tags=['ML inference'])
 async def run_inference(inference_data: InferenceData):
     try:
 

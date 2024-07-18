@@ -27,17 +27,17 @@ spec:
               name: backend-secret
               key: mongo-root-username
         - name: password
-          valueFrom: 
+          valueFrom:
             secretKeyRef:
               name: backend-secret
               key: mongo-root-password
         - name: database
-          valueFrom: 
+          valueFrom:
             secretKeyRef:
               name: backend-secret
               key: mongo-root-database
         - name: mlflow_experiment
-          valueFrom: 
+          valueFrom:
             secretKeyRef:
               name: backend-secret
               key: mlflow-experiment

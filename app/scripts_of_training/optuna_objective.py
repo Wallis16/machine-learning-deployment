@@ -17,17 +17,17 @@ def objective(trial : Trial, x : DataFrame, y : np.ndarray, collection_name: str
 
     mlflow.set_tracking_uri(mlflow_uri)
     mlflow.set_experiment(collection_name)
-    
+
     with mlflow.start_run():
         n_estimators = trial.suggest_int('n_estimators', 2, 20)
         max_depth = int(trial.suggest_float('max_depth', 1, 32, log=True))
 
         clf = RandomForestRegressor(n_estimators=n_estimators, max_depth=max_depth)
-        
+
         mean_score = cross_val_score(clf, x, y, n_jobs=-1, cv=3).mean()
 
         clf.fit(x, y)
- 
+
         # Log parameters and metrics
         mlflow.log_params(trial.params)
         mlflow.log_metric('mean_score', mean_score)

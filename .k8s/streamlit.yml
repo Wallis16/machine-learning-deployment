@@ -21,7 +21,7 @@ spec:
         - containerPort: 8501
         env:
         - name: URL_BACKEND
-          valueFrom: 
+          valueFrom:
             configMapKeyRef:
               name: backend-configmap
               key: artifacts_url

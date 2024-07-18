@@ -7,9 +7,9 @@ import os
 #from dotenv import load_dotenv, find_dotenv
 #load_dotenv(find_dotenv())
 
-user = os.getenv("user")
-password = os.getenv("password")
-database = os.getenv("database")
+user = os.getenv('user')
+password = os.getenv('password')
+database = os.getenv('database')
 
 # Dependency to get the MongoDB client
 async def get_mongo_client():
@@ -25,4 +25,4 @@ async def get_database(client = Depends(get_mongo_client)):
     try:
         yield client[database]
     except ServerSelectionTimeoutError:
-        raise HTTPException(status_code=500, detail="Could not connect to database")
+        raise HTTPException(status_code=500, detail='Could not connect to database')
