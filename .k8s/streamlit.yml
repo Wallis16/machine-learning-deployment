@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: streamlit-container
-        image: diogeneswallis96/streamlit-ml:0.0.1
+        image: diogeneswallis96/streamlit-ml:1.0.0
         ports:
         - containerPort: 8501
         env:
