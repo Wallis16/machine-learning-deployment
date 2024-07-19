@@ -1,10 +1,12 @@
-import mlflow
-import pandas as pd
+"""<>"""
 import os
+import pandas as pd
+import mlflow
 
 from mlflow import MlflowClient
 
 def inference(data):
+    """<>"""
 
     ready_data = data.dict()
     run_id = ready_data['run_id']
@@ -14,12 +16,13 @@ def inference(data):
 
     try:
         os.makedirs(f'{os.getcwd()}/inference_models/{run_id}/')
-    except Exception as e:
+    except OSError as e:
         print(e)
-        pass
 
-    client.download_artifacts(ready_data['run_id'], 'model', f'{os.getcwd()}/inference_models/{run_id}/')
-    loaded_model = mlflow.pyfunc.load_model(f'{os.getcwd()}/inference_models/{run_id}/model')
+    client.download_artifacts(ready_data['run_id'], 'model',
+                                f'{os.getcwd()}/inference_models/{run_id}/')
+    loaded_model = mlflow.pyfunc.load_model(f'{os.getcwd()}'+
+                                f'/inference_models/{run_id}/model')
 
     data_ = pd.DataFrame.from_dict(ready_data['inference_data'])
 

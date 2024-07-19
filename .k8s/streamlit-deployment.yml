@@ -17,6 +17,13 @@ spec:
       containers:
       - name: streamlit-container
         image: diogeneswallis96/streamlit-ml:1.0.0
+        resources:  
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
         ports:
         - containerPort: 8501
         env:
@@ -25,17 +32,3 @@ spec:
             configMapKeyRef:
               name: backend-configmap
               key: artifacts_url
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: streamlit-service
-spec:
-  selector:
-    app: streamlit
-  type: LoadBalancer
-  ports:
-    - protocol: TCP
-      port: 8501
-      targetPort: 8501
-      nodePort: 30024

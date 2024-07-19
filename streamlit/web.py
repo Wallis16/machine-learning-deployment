@@ -1,8 +1,8 @@
-import streamlit as st
+"""<>"""
+import os
 import json
 import requests
-
-import os
+import streamlit as st
 
 url_backend = os.getenv('URL_BACKEND')
 
@@ -19,9 +19,14 @@ if option == 'training':
     mlflow_server = st.text_input('mlflow uri', 'http://localhost:5000/')
 
     if st.button('Run Training'):
-        res = requests.get(f'{url_backend}/run_training/?collection_name={dataset_name}&mlflow_uri={mlflow_server}')
+        res = requests.get(f'{url_backend}/run_training/?' +
+                        f'collection_name={dataset_name}&mlflow_uri={mlflow_server}',
+                        timeout=120)
         dict_result = res.json()
-        st.subheader(f'Best model related to this training - Accuracy: {dict_result["accuracy"]}, Trial: {dict_result["trial"]}, Number of estimators: {dict_result["n_estimators"]}, Max depths: {dict_result["max_depth"]}')
+        st.subheader('Best model related to this training -' +
+        f'Accuracy: {dict_result["accuracy"]}, Trial: {dict_result["trial"]},' +
+        f'Number of estimators: {dict_result["n_estimators"]},' +
+        f'Max depths: {dict_result["max_depth"]}')
 
 if option == 'inference':
 
@@ -34,7 +39,10 @@ if option == 'inference':
     sort = st.text_input('sort', 'DESC')
 
     if st.button('Get run id'):
-        run_id = requests.get(f'{url_backend}/get_run_id/?mlflow_server={mlflow_server}&experiment_name={experiment_name}&metric={metric}&sort_by={sort}')
+        run_id = requests.get(f'{url_backend}/get_run_id/?' +
+            f'mlflow_server={mlflow_server}' +
+            f'&experiment_name={experiment_name}&metric={metric}&sort_by={sort}',
+            timeout = 3)
         st.write(run_id.json())
 
     st.write('Inference data')
@@ -45,7 +53,7 @@ if option == 'inference':
     run_id_inference =  st.text_input('run id', '')
     mlflow_server = st.text_input('mlflow uri', 'http://localhost:5000/')
 
-    input = {
+    input_inference = {
         'run_id': run_id_inference,
         'mlflow_uri': mlflow_server,
         'inference_data': {
@@ -62,5 +70,7 @@ if option == 'inference':
             }
 
     if st.button('Run Inference'):
-        res = requests.post(url=f'{url_backend}/inference/', data=json.dumps(input))
+        res = requests.post(url=f'{url_backend}/inference/',
+                             data=json.dumps(input_inference),
+                            timeout=3)
         st.subheader(f'Fare estimative - {res.json()}')

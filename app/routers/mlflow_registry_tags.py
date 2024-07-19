@@ -1,3 +1,4 @@
+"""<>"""
 from fastapi import APIRouter, HTTPException
 from mlflow import MlflowClient
 
@@ -8,7 +9,7 @@ router = APIRouter()
 @router.get('/run_tags/', tags=['ML registry'])
 async def run_tags(mlflow_server: str, registry_model_name: str,
                         tag_key: str, tag_value: str):
-
+    """<>"""
     try:
 
         mlflow.set_tracking_uri(mlflow_server)
@@ -18,4 +19,4 @@ async def run_tags(mlflow_server: str, registry_model_name: str,
         return 'model registration executed'
 
     except Exception as e:
-        raise HTTPException(status_code=400, detail=str(e))
+        raise HTTPException(status_code=400) from e

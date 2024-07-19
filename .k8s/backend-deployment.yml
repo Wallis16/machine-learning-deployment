@@ -17,6 +17,13 @@ spec:
       containers:
       - name: backend-container
         image: diogeneswallis96/backend-integrated-with-mlflow:0.0.1
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
         imagePullPolicy: "Always"
         ports:
         - containerPort: 8000
@@ -41,18 +48,3 @@ spec:
             secretKeyRef:
               name: backend-secret
               key: mlflow-experiment
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: backend-service
-spec:
-  selector:
-    app: backend
-  type: LoadBalancer
-  ports:
-    - protocol: TCP
-      port: 8000
-      targetPort: 8000
-      nodePort: 30022
